@@ -1,0 +1,21 @@
+<%= render "shared/navbar"%>
+<div class="hero-header" >
+    <div class="container d-flex justify-content-center align-items-center" id="content">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col col-xl-10">
+                <div class="card bg-dark" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-6 d-flex align-items-center"> 
+                            <%= image_tag "img/hero.png", class: "img-fluid d-none d-md-block" %> 
+                        </div>
+                        <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">  
+                                <%= render "form", user: @user%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>

@@ -1,0 +1,2 @@
+class OrdersPageController < ApplicationController  
+end

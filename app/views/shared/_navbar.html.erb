@@ -1,0 +1,124 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+    <h1 class="text-primary" style="color: #FEA116 !important">
+        <%= link_to " Restoran", home_path, class: "p-0 fa fa-cutlery" %> 
+    </h1>  
+
+    <div class="btn-group"> 
+        <% if Current.user != nil %>  
+            <button type="button" class="position-relative navbar-toggler btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: .3em"> 
+                <i class="fa fa-bell"></i>
+                <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
+                    1
+                </span> 
+            </button>  
+           
+            <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;">  
+                <% 10.times do %>
+                    <li class="mb-1"> 
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                            <div class="toast-header">
+                                <strong class="me-auto">Bootstrap</strong>
+                                <small>11 mins ago</small> 
+                            </div>
+                            <div class="toast-body">
+                                Hello, world! This is a toast message.
+                            </div>
+                        </div> 
+                    </li> 
+                <% end %>
+            </ul> 
+        <% end %>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> 
+            <span class="fa fa-bars"></span>  
+        </button> 
+     
+    </div>
+    <div class="collapse navbar-collapse" id="navbarCollapse"> 
+        <div class="navbar-nav ms-auto py-0 pe-4">    
+            <% if controller.controller_name == "home_page" %>
+                <%= link_to "Home", home_path, class: "nav-item nav-link active" %>  
+            <% else %>
+                <%= link_to "Home", home_path, class: "nav-item nav-link" %>  
+            <% end %>
+
+            <% if Current.user != nil %>
+                <% if controller.controller_name == "profile_page" %>
+                    <%= link_to "Profile", profile_path, class: "nav-item nav-link active", style: "font-family: Lucida Fax; font-style: Italic" %> 
+                <% else %>
+                    <%= link_to "Profile", profile_path, class: "nav-item nav-link", style: "font-family: Lucida Fax; font-style: Italic" %> 
+                <% end %>   
+            <% end %>
+
+            <%= link_to "Reservation", reservations_path, class: "nav-item nav-link" %> 
+
+            <% if controller.controller_name == "about_page" %>
+                <%= link_to "About", about_path, class: "nav-item nav-link active" %> 
+            <% else %>
+                <%= link_to "About", about_path, class: "nav-item nav-link" %> 
+            <% end %> 
+
+            <% if controller.controller_name == "service_page" %>
+                <%= link_to "Service", service_path, class: "nav-item nav-link active" %> 
+            <% else %>
+                <%= link_to "Service", service_path, class: "nav-item nav-link" %> 
+            <% end %>  
+
+            <% if controller.controller_name == "menu_page" %>
+                <%= link_to "Menu", menu_path, class: "nav-item nav-link active" %> 
+            <% else %>
+                <%= link_to "Menu", menu_path, class: "nav-item nav-link" %> 
+            <% end %>    
+
+            <% if controller.controller_name == "contact_page" %>
+                <%= link_to "Contact", contact_path, class: "nav-item nav-link active" %> 
+            <% else %>
+                <%= link_to "Contact", contact_path, class: "nav-item nav-link" %> 
+            <% end %> 
+            
+            <% if Current.user != nil %> 
+                <% if Current.user.provider == "google_oauth2" || Current.user.provider == "facebook" || Current.user.provider == "linkedin" %>
+                    <%= button_to "Logout", destroy_user_session_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", method: :delete %> 
+                <% else %>
+                    <%= button_to "Logout", logout_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", method: :delete %> 
+                <% end %>
+            <% end %>
+        </div> 
+        
+        <% if Current.user != nil %>  
+            <button type="button" class="position-relative btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" id="notification_btn"> 
+                <i class="fa fa-bell"></i>
+                <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
+                    1
+                </span> 
+            </button>  
+           
+            <ul class="dropdown-menu dropdown-menu-end " style="max-height: 40em; overflow: auto;">  
+                <% 10.times do %>
+                    <li class="mb-1 "> 
+                        <div class="toast " role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                            <div class="toast-header">
+                                <strong class="me-auto">Bootstrap</strong>
+                                <small>11 mins ago</small> 
+                            </div>
+                            <div class="toast-body">
+                                Hello, world! This is a toast message.
+                            </div>
+                        </div> 
+                    </li> 
+                <% end %>
+            </ul>  
+        <% end %>
+    </div>  
+</nav>
+   
+<%= javascript_include_tag "lib/bootstrap.bundle.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/wow/wow.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/easing/easing.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/waypoints/waypoints.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/counterup/counterup.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/owlcarousel/owl.carousel.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/tempusdominus/js/moment.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/tempusdominus/js/moment-timezone.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js", "data-turbo-track": "reload", defer: true %> 
+<%= javascript_include_tag "js/main.js", "data-turbo-track": "reload", defer: true %>  

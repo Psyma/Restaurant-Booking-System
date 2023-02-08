@@ -1,0 +1,55 @@
+<div class="bg-white p-0 min-vh-100 d-flex flex-column justify-content-between">
+    <%= render "shared/navbar" %>   
+    <div class="container py-5">
+        <div class="text-center">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+            <h1 class="mb-3">Restaurant Reservation</h1>
+        </div> 
+        
+        <%= turbo_frame_tag "reservation" do %> 
+            <div class="text-center" id="turbo-frame-1-content">    
+                <div class="row g-4"> 
+                    <div> 
+                        <div class="pull-right col"> 
+                            <%= search_form_for @q, url: reservations_path do |form|%> 
+                                <div class="text-center mt-1">
+                                    <%= form.search_field :name_cont%>
+                                    <%= form.submit %>
+                                </div>
+                            <% end %> 
+                        </div>
+                        
+                        <div class="pull-right col" style="margin-right: 20px;">  
+                            <%= form_with url: payments_path, method: :get do |form|%> 
+                                <%= form.button "", class: "position-relative btn btn-primary" do %> 
+                                    <i class="fa fa-shopping-bag"></i>
+                                    <% if @order.size != 0 %>
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
+                                            <%= @order.size %>
+                                        </span>
+                                    <% end %> 
+                                <% end %>          
+                            <% end %>    
+                        </div>   
+                    </div>   
+                    
+                    <%= render "products", products: @products %>
+
+                    <div class="digg_pagination"> 
+                        <div class="pull-right">
+                            <div class="page_info">
+                                <%= page_entries_info @products %>
+                            </div>
+                            <div class="pagination visible-xs">
+                                <%= will_paginate @products %> 
+                            </div> 
+                        </div>
+                    </div> 
+                </div> 
+            </div>      
+            <%= javascript_include_tag "js/reservations.js", "data-turbo-track": "reload", defer: true %> 
+        <% end %>   
+    </div> 
+    <%= render "shared/footer" %> 
+</div>  
+ 

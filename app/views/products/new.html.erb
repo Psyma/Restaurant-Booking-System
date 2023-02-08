@@ -1,0 +1,21 @@
+<%= render "shared/navbar"%>
+<div class="hero-header d-flex justify-content-center align-items-center"  id="content">  
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card bg-dark" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                        <%= link_to "", products_path, class: "fa fa-arrow-circle-o-left text-primary", style: "font-size: 2.5em; text-decoration: none; color: #6c757d" %> 
+                        <h2 class="text-uppercase text-center text-primary mb-5">New Product</h2>  
+                        <% if flash[:notice] %>
+                            <div class="alert alert-info text-center" role="alert">
+                                <%= flash[:notice] %>
+                            </div>
+                        <% end %> 
+                        <%= render "form", product: @product %> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

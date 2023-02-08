@@ -1,0 +1,24 @@
+<% products.each do |product| %>
+    <div class="col-lg-6">  
+        <%= form_tag(reservations_path, data: { turbo_frame: "reservation" }, method: :patch, remote: true) do %>
+            <%= hidden_field_tag :product_id, product.id() %>   
+            <div class="d-flex align-items-center">
+                <%= image_submit_tag(url_for(product.image()))%>
+                <div class="w-100 d-flex flex-column text-start ps-4">
+                    <h5 class="d-flex justify-content-between border-bottom pb-2">
+                        <span> 
+                            <%= product.name() %> 
+                            <% if @order.include?(product.id().to_i)%>
+                                <i class="fa fa-check-circle-o text-success" aria-hidden="true" %></i>
+                            <% else %>
+                                <i class="fa fa-check-circle-o text-success" aria-hidden="true" style="display: none" %></i>
+                            <% end %>
+                        </span>
+                        <span class="text-primary">$<%= product.price() %></span>
+                    </h5>
+                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                </div>
+            </div>
+        <% end %>  
+    </div> 
+<% end %>  

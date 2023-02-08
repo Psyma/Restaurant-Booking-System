@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cooking_time: MyString
+  price: MyString
+  is_available: 1
+
+two:
+  name: MyString
+  cooking_time: MyString
+  price: MyString
+  is_available: 1
