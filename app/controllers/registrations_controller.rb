@@ -5,11 +5,11 @@ class RegistrationsController < ApplicationController
  
     def create()
         @user = User.new(user_params()) 
-        @user.role = 0
+        @user.role = Roles::CUSTOMER
         
         if @user.save()
-            session[:user_id] = @user.id()
-            redirect_to root_path
+            flash[:notice] = "A verification email has been sent to your email."
+            redirect_to login_path
         else 
             render :index
         end 

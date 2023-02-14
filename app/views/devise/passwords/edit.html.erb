@@ -1,0 +1,40 @@
+<%= render "shared/navbar"%> 
+<div class="hero-header d-flex justify-content-center align-items-center"  id="content">  
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col col-xl-10">
+                <div class="card bg-dark" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-6 d-flex align-items-center"> 
+                            <%= image_tag "img/hero.png", class: "img-fluid d-none d-md-block" %> 
+                        </div>
+                        <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black"> 
+                                <h3 class="text-light mb-4">Change your password</h3>
+                                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>  
+                                    <%= f.hidden_field :reset_password_token %>
+                                    <div class="form-floating mb-4">
+                                        <%= password_field_tag :password, nil, name: field_name(nil, "user", :password), class: "form-control", placeholder: "New password" %>
+                                        <div class="pull-right text-danger">
+                                            <%= inline_error_for(:password, resource) %>
+                                        </div>
+                                        <%= label_tag :password, "New Password" %>
+                                    </div>
+
+                                    <div class="form-floating mb-4">
+                                        <%= password_field_tag :password_confirmation, nil, name: field_name(nil, "user", :password_confirmation), class: "form-control", placeholder: "Confirm new password" %>
+                                        <div class="pull-right text-danger">
+                                            <%= inline_error_for(:password_confirmation, resource) %>
+                                        </div>
+                                        <%= label_tag :password_confirmation, "Confirm new password" %>
+                                    </div>
+
+                                <%= f.submit "Change my password", class: "btn btn-success btn-block mt-2", style: "width: 100%" %>                                  <% end %> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

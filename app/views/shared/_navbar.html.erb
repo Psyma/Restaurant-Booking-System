@@ -4,36 +4,40 @@
     </h1>  
 
     <div class="btn-group"> 
-        <% if Current.user != nil %>  
-            <button type="button" class="position-relative navbar-toggler btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: .3em"> 
-                <i class="fa fa-bell"></i>
-                <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
-                    1
-                </span> 
-            </button>  
+        <% if Current.user != nil %>   
+            <%= form_with url: home_path, data: { turbo: false }, method: :patch, remote: true, id: "form1_notification" do |form| %>   
+                <button class="position-relative navbar-toggler btn btn-primary", data-bs-toggle="dropdown" data-bs-target="#navbarCollapse" style="margin-right: .3em" onclick="click_notification('form1_notification')" >     
+                    <i class="fa fa-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75" id="span_notification1">
+                        <% if Current.user.notifications.where(seen: Seen::NOT_SEEN).length != 0 %>
+                            <%= Current.user.notifications.where(seen: Seen::NOT_SEEN).length %>
+                        <% end %>
+                    </span> 
+               </button>
            
-            <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;">  
-                <% 10.times do %>
-                    <li class="mb-1"> 
-                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-                            <div class="toast-header">
-                                <strong class="me-auto">Bootstrap</strong>
-                                <small>11 mins ago</small> 
-                            </div>
-                            <div class="toast-body">
-                                Hello, world! This is a toast message.
-                            </div>
-                        </div> 
-                    </li> 
-                <% end %>
-            </ul> 
+                <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;">  
+                    <% Current.user.notifications.reverse.each do |notification|%>
+                        <li class="mb-1"> 
+                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                                <div class="toast-header">
+                                    <strong class="me-auto"><%= notification.title %></strong>
+                                    <small><%= time_ago_in_words(notification.created_at) %></small> 
+                                </div>
+                                <div class="toast-body">
+                                    <%= notification.content %>
+                                </div>
+                            </div> 
+                        </li> 
+                    <% end %>
+                </ul> 
+            <% end %> 
         <% end %>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"> 
             <span class="fa fa-bars"></span>  
-        </button> 
-     
+        </button>  
     </div>
+
     <div class="collapse navbar-collapse" id="navbarCollapse"> 
         <div class="navbar-nav ms-auto py-0 pe-4">    
             <% if controller.controller_name == "home_page" %>
@@ -41,17 +45,23 @@
             <% else %>
                 <%= link_to "Home", home_path, class: "nav-item nav-link" %>  
             <% end %>
-
+         
             <% if Current.user != nil %>
-                <% if controller.controller_name == "profile_page" %>
-                    <%= link_to "Profile", profile_path, class: "nav-item nav-link active", style: "font-family: Lucida Fax; font-style: Italic" %> 
+                <% if controller.controller_name == "bookings_page" %>
+                    <%= link_to "Bookings", bookings_path, class: "nav-item nav-link active", style: "font-family: Lucida Fax; font-style: Italic" %> 
                 <% else %>
-                    <%= link_to "Profile", profile_path, class: "nav-item nav-link", style: "font-family: Lucida Fax; font-style: Italic" %> 
+                    <%= link_to "Bookings", bookings_path, class: "nav-item nav-link", style: "font-family: Lucida Fax; font-style: Italic" %> 
                 <% end %>   
-            <% end %>
 
-            <%= link_to "Reservation", reservations_path, class: "nav-item nav-link" %> 
-
+                <% if Current.user.role == Roles::ADMIN %> 
+                    <% if controller.controller_name == "products" %>
+                        <%= link_to "Products", products_path, class: "nav-item nav-link active", style: "font-family: Lucida Fax; font-style: Italic" %> 
+                    <% else %>
+                        <%= link_to "Products", products_path, class: "nav-item nav-link", style: "font-family: Lucida Fax; font-style: Italic" %> 
+                    <% end %>  
+                <% end %> 
+            <% end %>  
+            
             <% if controller.controller_name == "about_page" %>
                 <%= link_to "About", about_path, class: "nav-item nav-link active" %> 
             <% else %>
@@ -78,36 +88,14 @@
             
             <% if Current.user != nil %> 
                 <% if Current.user.provider == "google_oauth2" || Current.user.provider == "facebook" || Current.user.provider == "linkedin" %>
-                    <%= button_to "Logout", destroy_user_session_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", method: :delete %> 
+                    <%= button_to "Logout", destroy_user_session_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", :method => :delete %> 
                 <% else %>
                     <%= button_to "Logout", logout_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", method: :delete %> 
                 <% end %>
             <% end %>
-        </div> 
-        
-        <% if Current.user != nil %>  
-            <button type="button" class="position-relative btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false" id="notification_btn"> 
-                <i class="fa fa-bell"></i>
-                <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
-                    1
-                </span> 
-            </button>  
-           
-            <ul class="dropdown-menu dropdown-menu-end " style="max-height: 40em; overflow: auto;">  
-                <% 10.times do %>
-                    <li class="mb-1 "> 
-                        <div class="toast " role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-                            <div class="toast-header">
-                                <strong class="me-auto">Bootstrap</strong>
-                                <small>11 mins ago</small> 
-                            </div>
-                            <div class="toast-body">
-                                Hello, world! This is a toast message.
-                            </div>
-                        </div> 
-                    </li> 
-                <% end %>
-            </ul>  
+        </div>    
+        <% if Current.user != nil %>     
+            <%= render "shared/notification" %> 
         <% end %>
     </div>  
 </nav>

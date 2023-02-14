@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController 
-    before_action :redirect_if_logged_in, only: [:index]
+    before_action :redirect_if_logged_in, only: [:index] 
 
     def index()   
         @q = Product.ransack(params[:q])
@@ -26,17 +26,7 @@ class ReservationsController < ApplicationController
         @order = session[:order] 
 
         render :index
-    end
-
-    def create
-        @reservation = Reservation.new(date: "date", status: 0, user_id: 1)
-        @reservation.save
-        @reservation.user = Current.user
-        @order = @reservation.create_order(total_amount: "amount")
-        @order.products = Product.where(id: session[:order])
-        
-        redirect_to root_path
-    end
+    end 
 
     private
     def reservation_params()

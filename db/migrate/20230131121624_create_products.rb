@@ -4,8 +4,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
             t.string :name
             t.string :cooking_time
             t.string :price
-            t.integer :is_available 
-            t.integer :order_id
+            t.integer :is_available  
 
             t.timestamps
         end

@@ -3,22 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.3"
 
-gem 'bootstrap', '~> 5.2.2'
-gem "font-awesome-rails"
-gem 'jquery-rails'
-gem 'owlcarousel-rails'
-gem 'will_paginate', '~> 3.3'
-gem 'ransack'
-
-gem 'devise'
-gem "omniauth-twitter2"
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-linkedin-oauth2'
-gem 'omniauth-rails_csrf_protection' 
-gem 'dotenv-rails'
-gem 'jquery-ui-rails'
-
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 
@@ -72,6 +56,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "letter_opener"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -86,3 +71,22 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end 
+
+gem 'local_time'
+gem 'bootstrap', '~> 5.2.2'
+gem "font-awesome-rails"
+gem 'jquery-rails'
+gem 'owlcarousel-rails'
+gem 'will_paginate', '~> 3.3'
+gem 'ransack'
+
+gem 'devise'
+gem "omniauth-twitter2"
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-rails_csrf_protection' 
+gem 'dotenv-rails'
+gem 'jquery-ui-rails' 
+gem 'turbolinks', '~> 5.2.0' 
+gem 'faker'

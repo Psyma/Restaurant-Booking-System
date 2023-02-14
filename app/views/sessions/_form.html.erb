@@ -2,19 +2,26 @@
     <div class="d-flex align-items-center mb-3 pb-1 justify-content-center"> 
         <h1 class="text-primary m-0 text-center"><i class="fa fa-cutlery me-3"></i>Restoran</h1> 
     </div> 
+    
     <% if flash[:alert] %>
         <div class="alert alert-danger text-center" role="alert">
             <%= flash[:alert] %>
         </div>
     <% end %>
-    <div class="form-outline mb-4">
-        <%= form.text_field :email, class: "form-control" %> 
-        <%= form.label :email, "Email address", class: "form-label text-light" %> 
+    <% if flash[:notice] %>
+        <div class="alert alert-info text-center" role="alert">
+            <%= flash[:notice] %>
+        </div>
+    <% end %> 
+                                
+    <div class="form-floating mb-4">
+        <%= form.email_field :email, autofocus: true, class: "form-control", placeholder: "Email address" %> 
+        <%= form.label :email, "Email address", class: "" %> 
     </div>
 
-    <div class="form-outline mb-4">
-        <%= form.password_field :password, class: "form-control" %> 
-        <%= form.label :email, "Password", class: "form-label text-light" %>  
+    <div class="form-floating mb-4">
+        <%= form.password_field :password, class: "form-control", placeholder: "Password" %> 
+        <%= form.label :password, "Password", class: "" %>  
     </div>
 
     <div class="pt-1 mb-2">
@@ -27,16 +34,16 @@
 
     <div class="d-flex justify-content-center">  
        <div class="pt-2 ">  
-            <%= link_to "", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-light btn-social fa fa-google", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
+            <%= link_to "", user_google_oauth2_omniauth_authorize_path, onclick: "google()", remote: true, class: "btn btn-outline-light btn-social fa fa-google", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
             <%= link_to "", user_facebook_omniauth_authorize_path, onclick: "facebook()", remote: true, class: "btn btn-outline-light btn-social fa fa-facebook-f", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
             <%= link_to "", user_twitter2_omniauth_authorize_path, onclick: "twitter2()", remote: true, class: "btn btn-outline-light btn-social fa fa-twitter", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
             <%= link_to "", user_linkedin_omniauth_authorize_path, onclick: "linkedin()", remote: true, class: "btn btn-outline-light btn-social fa fa-linkedin", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
         </div>
     </div>
-
-    <a class="small text-muted" href="#!">Forgot password?</a> 
+ 
+    <%= link_to "Forgot password?", new_user_password_path, class: "small text-muted" %>   
     <p class="mb-5 pb-lg-2 text-light" style="color: #393f81;">
-        Don't have an account? <%= link_to "Register here", registrations_path, class: "text-info" %> 
+        Don't have an account? <%= link_to "Register here", registrations_path, class: "text-info" %>  
     </p>
     <a href="#!" class="small text-muted">Terms of use.</a>
     <a href="#!" class="small text-muted">Privacy policy</a>

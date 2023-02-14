@@ -41,8 +41,12 @@ $enable-negative-margins: true;
 
 
 @media (max-width: 992px) {
-    #notification_btn {
+    #button_notification {
         display: none;
     }
+}
+
+#payment_datepicker::placeholder {
+    color: red
 }
  

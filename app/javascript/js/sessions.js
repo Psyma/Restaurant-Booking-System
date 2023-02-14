@@ -1,3 +1,7 @@
+function google() {
+    //return false
+}
+
 function facebook() {
     return false
 }

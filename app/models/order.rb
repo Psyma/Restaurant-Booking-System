@@ -1,4 +1,3 @@
 class Order < ApplicationRecord
-    belongs_to :reservation
-    has_many :products
+    has_many :order_products
 end
