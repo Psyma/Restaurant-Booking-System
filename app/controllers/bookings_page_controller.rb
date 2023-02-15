@@ -51,6 +51,20 @@ class BookingsPageController < ApplicationController
         render :index
     end 
 
+    def cancel()
+        reservation = Reservation.find(params[:reservation_id])
+        reservation.update(:status => Status::CANCELED) 
+        
+        redirect_to bookings_path
+    end
+
+    def destroy()
+        reservation = Reservation.find(params[:reservation_id])
+        reservation.update(:status => Status::DELETED) 
+
+        redirect_to bookings_path
+    end
+
     private
     def ransack_search()
         @q = User.ransack(params[:q])

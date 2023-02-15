@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get "/bookings", to: "bookings_page#index"
     patch "/bookings", to: "bookings_page#confirm"
     put "/bookings", to: "bookings_page#decline" 
+    patch "/bookings/cancel", to: "bookings_page#cancel"
+    delete "/bookings", to: "bookings_page#destroy"
     
     get "/login", to: "sessions#index"
     post "/login", to: "sessions#login"

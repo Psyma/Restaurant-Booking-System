@@ -38,15 +38,10 @@
                         </div>   
                         
                         <%= render "products", products: @products %>
-
+                        
                         <div class="digg_pagination"> 
-                            <div class="pull-right">
-                                <div class="page_info">
-                                    <%= page_entries_info @products %>
-                                </div>
-                                <div class="pagination visible-xs">
-                                    <%= will_paginate @products %> 
-                                </div> 
+                            <div class="pull-right container d-flex">
+                                <%= will_paginate @products, renderer: WillPaginate::ActionView::LinkRenderer  %>    
                             </div>
                         </div> 
                     </div> 

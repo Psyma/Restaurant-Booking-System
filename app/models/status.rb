@@ -1,5 +1,7 @@
 class Status
-    PENDING = 0
-    CONFIRMED = 1
-    DECLINED = 2
+    DELETED = 0
+    PENDING = 1
+    CANCELED = 2
+    DECLINED = 3
+    CONFIRMED = 4
 end 

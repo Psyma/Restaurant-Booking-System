@@ -48,5 +48,17 @@ $enable-negative-margins: true;
 
 #payment_datepicker::placeholder {
     color: red
+} 
+
+.p-viewer {
+    position: relative;
+    margin: -50px 15px auto;
+    float: right;
+    font-size: 25px;
+    cursor: pointer; 
 }
- 
+
+.disabled {
+    opacity: 0.5; 
+    pointer-events: none; 
+}

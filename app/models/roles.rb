@@ -1,4 +1,4 @@
 class Roles
-    ADMIN = 1
-    CUSTOMER = 0
+    ADMIN = 0
+    CUSTOMER = 1
 end

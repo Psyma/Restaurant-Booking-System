@@ -41,6 +41,9 @@
             <%= inline_error_for(:password, user) %>
         </div>
         <%= label_tag :password, "Password" %>
+        <span for='icon' class="p-viewer">
+            <i class="fa fa-eye" aria-hidden="true" onclick="password_toggle(event)" id="password_eye"></i>
+        </span>
     </div>
 
     <div class="form-floating mb-4">
@@ -49,6 +52,9 @@
             <%= inline_error_for(:password_confirmation, user) %>
         </div>
         <%= label_tag :password_confirmation, "Password confirmation" %>
+        <span for='icon' class="p-viewer">
+            <i class="fa fa-eye" aria-hidden="true" onclick="password_confirmation_toggle(event)" id="password_confirmation_eye"></i>
+        </span>
     </div>
     
     <%= form.submit "SIGN UP", class: "btn btn-success btn-block mt-2", style: "width: 100%" %>  
@@ -56,4 +62,5 @@
         Already have an account? <%= link_to "login here", login_path, class: "text-info" %> 
     </p>  
 <% end %>
+<%= javascript_include_tag "js/registrations.js", "data-turbo-track": "reload", defer: true %> 
  
