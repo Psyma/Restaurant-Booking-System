@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
     end
 
     private
-    def redirect_if_logged_in   
+    def redirect_if_logged_in()   
         redirect_to root_path if Current.user
     end
 end

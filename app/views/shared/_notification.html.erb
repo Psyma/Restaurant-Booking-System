@@ -1,18 +1,15 @@
- 
-<%= form_with url: home_path, data: { turbo: true }, method: :patch, remote: true, id: "form2_notification" do |form| %>  
-    <button <% if Current.user.notifications.where(seen: Seen::NOT_SEEN).length != 0  %> class="position-relative btn btn-primary" <% else %> class="position-relative btn btn-default" <% end %> data-bs-toggle="dropdown" onclick="click_notification('form2_notification')" id="button_notification"> 
-        <i class="fa fa-bell"></i>
-        <%=turbo_frame_tag "notifications" do%>
+<%= form_with url: home_path, data: { turbo: true }, method: :patch, remote: true, id: "form2_notification" do |form| %>   
+    <button <% if model.notifications.where(seen: Seen::NOT_SEEN).length != 0  %> class="position-relative btn btn-primary" <% else %> class="position-relative btn btn-default" <% end %> data-bs-toggle="dropdown" onclick="click_notification('form2_notification')" id="button_notification"> 
+        <i class="fa fa-bell"></i>  
         <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75" id="span_notification2">
-            <% if Current.user.notifications.where(seen: Seen::NOT_SEEN).length != 0 %>
-                <%= Current.user.notifications.where(seen: Seen::NOT_SEEN).length %>
+            <% if model.notifications.where(seen: Seen::NOT_SEEN).length != 0 %>
+                <%= model.notifications.where(seen: Seen::NOT_SEEN).length %>
             <% end %>
-        </span> 
-        <% end %> 
+        </span>   
     </button> 
         
     <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;" >  
-        <% Current.user.notifications.reverse.each do |notification|%>
+        <% model.notifications.reverse.each do |notification|%>
             <li class="mb-1"> 
                 <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false"> 
                     <div class="toast-header">

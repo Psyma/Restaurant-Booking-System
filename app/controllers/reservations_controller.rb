@@ -14,7 +14,7 @@ class ReservationsController < ApplicationController
         @order = session[:order] 
     end 
 
-    def update    
+    def update()    
         if !session[:order].include?(params[:product_id].to_i) 
             session[:order].push(params[:product_id].to_i)  
         else
@@ -33,7 +33,7 @@ class ReservationsController < ApplicationController
         params.require(:reservation).permit(:user_id, :date)
     end 
      
-    def redirect_if_logged_in     
+    def redirect_if_logged_in()     
         redirect_to login_path if Current.user == nil
     end
 end

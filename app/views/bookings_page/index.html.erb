@@ -9,6 +9,15 @@
         <% if Current.user.role == Roles::ADMIN %> 
             <div class="panel panel-default panel-table" >   
                 <%= turbo_frame_tag "admin_bookings" do %>
+                    <div class="pull-right mb-2">
+                        <%= search_form_for @q, url: bookings_path do |form|%> 
+                            <div class="text-center mt-1">
+                                <%= form.search_field :first_name_cont %>
+                                <%= form.submit %>
+                            </div>
+                        <% end %>
+                    </div>
+
                     <div class="panel-table">
                         <table class="table table-striped table-bordered">
                             <thead>
@@ -23,7 +32,7 @@
                             </thead>
                             <tbody> 
                                 <% @reservations.each do |reservation|%>  
-                                    <tr class="text-center"> 
+                                    <tr class="text-center align-middle fw-bold"> 
                                         <td>
                                             <h6>
                                                 <% user = User.find(reservation.user_id) %>
@@ -31,11 +40,7 @@
                                             </h6>
                                             
                                         </td>
-                                        <td>
-                                            <h6>
-                                                <%= reservation.date%>
-                                            </h6>
-                                        </td> 
+                                        <td> <h6><%= reservation.date %></h6> </td> 
                                         <td>
                                             <% if reservation.status == Status::PENDING %>
                                                 <h6 class="text-warning">PENDING</h6>
@@ -46,15 +51,12 @@
                                             <% end %>
                                         </td> 
                                         <td>
-                                            <button class="btn btn-secondary fw-bolder">
+                                            <button class="btn btn-secondary fw-bolder" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                 ordered products
-                                            </button>
+                                            </button> 
+                                            <%= render "modal", orders: reservation.order.order_products %> 
                                         </td>
-                                        <td>
-                                            <h6>
-                                                <%= reservation.order.total_amount %>$
-                                            </h6>
-                                        </td>
+                                        <td><h6><%= reservation.order.total_amount %> $</h6></td>
                                         <td class="text-center"> 
                                             <div class="btn-group">   
                                                 <%= form_with url: bookings_path, data: { turbo: true }, method: :patch do |form|%>
@@ -85,6 +87,7 @@
                             <%= will_paginate @reservations %> 
                         </div> 
                     </div>    
+                    <%= javascript_include_tag "js/bookings.js", "data-turbo-track": "reload", defer: true %> 
                 <% end %>
             </div> 
         <% else %>  
@@ -114,7 +117,7 @@
                                 <tbody>   
                                     <% reservation.order.order_products.paginate(:page => params[:page], per_page: 8).each do |order| %>
                                         <% product = Product.find(order.product_id) %>
-                                        <tr class="text-center align-middle">
+                                        <tr class="text-center align-middle fw-bold">
                                             <td><%= image_tag(product.image(), :style => "width: 3.5em") %></td>
                                             <td><%= product.name %></td> 
                                             <td><%= product.price %> $</td>
@@ -138,3 +141,5 @@
         <% end %>  
     </div>  
 </div> 
+
+

@@ -44,6 +44,7 @@ Devise.setup do |config|
         :prompt => 'login'
     }
     OmniAuth.config.allowed_request_methods = %i[get]
+    OmniAuth.config.silence_get_warning = true
     
     
     # Configure the class responsible to send e-mails.

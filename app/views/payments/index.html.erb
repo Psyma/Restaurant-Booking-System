@@ -21,7 +21,7 @@
                     
                     <tbody>   
                         <% @products.each do |product| %> 
-                            <tr class="text-center align-middle">  
+                            <tr class="text-center align-middle fw-bold">  
                                 <td >
                                     <%= image_tag(product.image(), :style => "width: 3.5em") %>
                                 </td> 
@@ -62,10 +62,10 @@
                     
                     <div class="form-group form-control mt-2">   
                         <div class="d-inline-block">
-                            <%= form.label :total_amount, "Total: "%>
+                            <label>Total: </label> 
                         </div>
-                        <div class="d-inline-block">
-                            <%= form.text_field :total_amount, id: "payment_total_amount", value: @total_amount, readonly: true %>    
+                        <div class="d-inline-block"> 
+                            <input type="text" value=<%=@total_amount%> readonly>
                         </div>  
                     </div> 
 

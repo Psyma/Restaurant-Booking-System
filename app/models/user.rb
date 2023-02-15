@@ -6,12 +6,18 @@ class User < ApplicationRecord
     :confirmable, :lockable, :timeoutable, :trackable,
     :omniauthable, omniauth_providers: [:google_oauth2, :facebook, :linkedin, :twitter2]
     
+    has_many :comments
     has_many :reservations
     has_many :notifications
+    has_one_attached :image 
     
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :address, presence: true   
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["first_name", "last_name"]
+    end
 
     def self.from_omniauth(auth)   
         where(provider: auth.provider, uid: auth.uid).first_or_create do |user|  

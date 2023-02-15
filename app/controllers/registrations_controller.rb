@@ -9,6 +9,8 @@ class RegistrationsController < ApplicationController
         
         if @user.save()
             flash[:notice] = "A verification email has been sent to your email."
+            filepath = "assets/images/default_profile.png"
+            @user.image.attach('filename': "default.png", io: File.open(Rails.root.join('app', filepath))) 
             redirect_to login_path
         else 
             render :index

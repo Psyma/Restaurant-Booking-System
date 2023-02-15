@@ -1,5 +1,5 @@
-function google() {
-    //return false
+function google() { 
+    return true
 }
 
 function facebook() {

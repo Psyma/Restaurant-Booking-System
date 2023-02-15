@@ -122,6 +122,7 @@ function click_notification(form_id) {
     var actionUrl = form.attr('action'); 
      
     $.ajax({
+        //headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
         type: "PATCH",
         url: "/home",
         data: form.serialize(), 
@@ -130,7 +131,7 @@ function click_notification(form_id) {
             $('#span_notification2').html("") 
             $('#button_notification').removeClass('position-relative btn btn-primary').addClass('position-relative btn btn-default')
         }
-    });
+    });  
 }
 
 

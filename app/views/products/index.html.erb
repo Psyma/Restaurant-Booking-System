@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
                             <% @products.each do |product|%> 
-                                <tr class="text-center"> 
+                                <tr class="text-center align-middle fw-bold"> 
                                     <th>
                                         <%= product.id() %>
                                     </th>
@@ -58,9 +58,13 @@
                                     </td>
                                     <td>
                                         <% if product.is_available() == 1 %>
-                                            <p style="color: green">AVAILABLE</p>
+                                            <div class="text-success">
+                                                AVAILABLE
+                                            </div>
                                         <% else %>
-                                            <p style="color: red">N/A</p>
+                                            <div class="text-danger">
+                                                N/A
+                                            </div>
                                         <% end%>
                                     </td>
                                     <td class="text-center"> 

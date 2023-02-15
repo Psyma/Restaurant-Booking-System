@@ -1,11 +1,16 @@
 class BookingsPageController < ApplicationController
     before_action :check_user 
     
-    def index()   
-        @reservations = Reservation.paginate(:page => params[:page], per_page: 10)   
+    def index()    
+        @q = User.ransack(params[:q])
+        if @q.result
+            @reservations = Reservation.where(:user_id => @q.result.map(&:id)).paginate(:page => params[:page], per_page: 8)  
+        else
+            @reservations = Reservation.paginate(:page => params[:page], per_page: 8)  
+        end 
         session[:page] = params[:page]
     end 
-
+    
     def confirm() 
         reservation = Reservation.find(params[:reservation_id]) 
         if reservation.status != Status::CONFIRMED  
@@ -22,7 +27,7 @@ class BookingsPageController < ApplicationController
             admin.notifications << notification  
         end
 
-        @reservations = Reservation.paginate(:page => session[:page], per_page: 10)  
+        ransack_search()
         render :index
     end
 
@@ -34,7 +39,7 @@ class BookingsPageController < ApplicationController
             notification = Notification.new(:title => "Declined", :content => "Sorry! your table reservation has been decline", :seen => Seen::NOT_SEEN)
             notification.save
             user = User.find(reservation.user_id)
-            user.notifications << Notification
+            user.notifications << notification
 
             admin = User.where(role: Roles::ADMIN).first
             notification = Notification.new(:title => "Table booked declined", :content => "A table booked by #{user.first_name} has been declined", :seen => Seen::NOT_SEEN)
@@ -42,12 +47,21 @@ class BookingsPageController < ApplicationController
             admin.notifications << notification 
         end
 
-        @reservations = Reservation.paginate(:page => session[:page], per_page: 10)  
+        ransack_search()
         render :index
     end 
 
     private
-    def check_user
+    def ransack_search()
+        @q = User.ransack(params[:q])
+        if @q.result
+            @reservations = Reservation.where(:user_id => @q.result.map(&:id)).paginate(:page => session[:page], per_page: 8)  
+        else
+            @reservations = Reservation.paginate(:page => session[:page], per_page: 8)  
+        end 
+    end
+
+    def check_user()
         if Current.user == nil
             redirect_to root_path 
         end

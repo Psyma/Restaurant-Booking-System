@@ -7,6 +7,13 @@
                     <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
                     <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                     <%= link_to "Book A Table", reservations_path, class: "btn btn-primary py-2 px-4" %>
+                    <% if Current.user != nil%>
+                        <% if Current.user.role == Roles::CUSTOMER %>
+                            <button type="button" class="btn btn-primary py-2 px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Feedback
+                            </button>
+                        <% end %>
+                    <% end %>
                 </div>
                 <div class="col-lg-6 text-center text-lg-end overflow-hidden">
                     <%= image_tag "img/hero.png", class: "img-fluid" %>  
@@ -15,3 +22,28 @@
         </div>
     </div>
 </div>
+ 
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <%= form_with model: comment, data: { turbo: false }, url: home_path do |form|%>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tell us your experience about us</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                        <%= form.text_area :contents, cols: 1, rows: 8, class: "form-control h-50" %>
+                    </div> 
+                </div>
+                 
+                <div class="modal-footer">
+                    <%= form.submit "Submit", class: "btn btn-success" %>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+                </div>
+            <%end%>
+        </div>
+    </div>
+</div>
+ 

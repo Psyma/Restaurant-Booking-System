@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end 
  
     private 
-    def redirect_if_signed_in 
+    def redirect_if_signed_in()
         if request.path == '/users/sign_in'
             redirect_to login_path
         end

@@ -2,9 +2,9 @@
     <h1 class="text-primary" style="color: #FEA116 !important">
         <%= link_to " Restoran", home_path, class: "p-0 fa fa-cutlery" %> 
     </h1>  
-
+    
     <div class="btn-group"> 
-        <% if Current.user != nil %>   
+        <% if Current.user != nil %>    
             <%= form_with url: home_path, data: { turbo: false }, method: :patch, remote: true, id: "form1_notification" do |form| %>   
                 <button class="position-relative navbar-toggler btn btn-primary", data-bs-toggle="dropdown" data-bs-target="#navbarCollapse" style="margin-right: .3em" onclick="click_notification('form1_notification')" >     
                     <i class="fa fa-bell"></i>
@@ -93,9 +93,9 @@
                     <%= button_to "Logout", logout_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", method: :delete %> 
                 <% end %>
             <% end %>
-        </div>    
-        <% if Current.user != nil %>     
-            <%= render "shared/notification" %> 
+        </div>     
+        <% if Current.user != nil %>        
+            <%= render "shared/notification", model: Current.user %>  
         <% end %>
     </div>  
 </nav>

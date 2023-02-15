@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :products 
 
     get "/home", to: "home_page#index"
+    post "/home", to: "home_page#create"
     patch "/home", to: "home_page#update"
+    
     get "/about", to: "about_page#index"
     get "/service", to: "service_page#index"
     get "/menu", to: "menu_page#index"

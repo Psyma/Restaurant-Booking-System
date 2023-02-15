@@ -23,8 +23,9 @@
                             </div>
                             
                             <div class="pull-right col" style="margin-right: 20px;">  
-                                <%= form_with url: payments_path, data: { turbo: false }, method: :get do |form|%> 
-                                    <%= form.button "", class: "position-relative btn btn-primary" do %> 
+                                <%= link_to "continue", payments_path, id: "continue_to_payment", "hidden" => true  %>
+                                <%= form_with url: payments_path, data: { turbo: true } do |form|%>  
+                                    <%= form.button "", class: "position-relative btn btn-primary", formmethod: :get, onclick: "click_payments()" do %> 
                                         <i class="fa fa-shopping-bag"></i>
                                         <% if @order.size != 0 %>
                                             <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
@@ -32,7 +33,7 @@
                                             </span>
                                         <% end %> 
                                     <% end %>          
-                                <% end %>    
+                                <% end %>
                             </div>   
                         </div>   
                         
