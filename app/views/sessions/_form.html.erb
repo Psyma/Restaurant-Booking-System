@@ -39,9 +39,9 @@
     <div class="d-flex justify-content-center">  
        <div class="pt-2 ">  
             <%= link_to "", user_google_oauth2_omniauth_authorize_path, onclick: "google()",  class: "btn btn-outline-light btn-social fa fa-google", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
-            <%= link_to "", user_facebook_omniauth_authorize_path, onclick: "facebook()", class: "btn btn-outline-light btn-social fa fa-facebook-f", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
-            <%= link_to "", user_twitter2_omniauth_authorize_path, onclick: "twitter2()", class: "btn btn-outline-light btn-social fa fa-twitter", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
-            <%= link_to "", user_linkedin_omniauth_authorize_path, onclick: "linkedin()", class: "btn btn-outline-light btn-social fa fa-linkedin", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
+            <%= link_to "", login_path, onclick: "facebook()", class: "btn btn-outline-light btn-social fa fa-facebook-f", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
+            <%= link_to "", login_path, onclick: "twitter2()", class: "btn btn-outline-light btn-social fa fa-twitter", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
+            <%= link_to "", login_path, onclick: "linkedin()", class: "btn btn-outline-light btn-social fa fa-linkedin", style: "font-size: 23px", data: { turbo: false }, method: :get %> 
         </div>
     </div>
  

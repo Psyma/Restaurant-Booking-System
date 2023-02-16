@@ -7,7 +7,7 @@ function facebook() {
 }
 
 function twitter2() {
-    return false
+    event.preventDefault()
 }
 
 function linkedin() {
