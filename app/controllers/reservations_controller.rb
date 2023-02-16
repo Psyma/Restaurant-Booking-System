@@ -34,6 +34,12 @@ class ReservationsController < ApplicationController
     end 
      
     def redirect_if_logged_in()     
-        redirect_to login_path if Current.user == nil
+        if Current.user == nil
+            redirect_to login_path
+        else
+            if Current.user.role == Roles::ADMIN
+                redirect_to root_path
+            end
+        end 
     end
 end

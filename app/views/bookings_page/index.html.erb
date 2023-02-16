@@ -55,11 +55,11 @@
                                                     <h6 class="text-danger">DECLINE</h6>
                                                 <% end %>
                                             </td> 
-                                            <td>
-                                                <button class="btn btn-secondary fw-bolder" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                    ordered products
-                                                </button> 
-                                                <%= render "modal", orders: reservation.order.order_products %> 
+                                            <td>  
+                                                <button class="btn btn-info fw-bolder" data-bs-toggle="modal" data-bs-target="#modal-<%= reservation.id %>">
+                                                    view products
+                                                </button>  
+                                                <%= render "modal", id: "modal-#{reservation.id}", orders: reservation.order.order_products %>   
                                             </td>
                                             <td><h6><%= reservation.order.total_amount %> $</h6></td>
                                             <td class="text-center"> 

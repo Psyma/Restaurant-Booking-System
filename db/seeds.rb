@@ -19,7 +19,7 @@ def set_users()
     else
         admin = User.create(first_name: "admin", last_name: "admin", email: "admin@admin.com", address: "3187 Golden Ridge Road", password: "password", confirmed_at: Time.now, role: Roles::ADMIN)
         admin.image.attach('filename': 'profile.png', io: File.open(Rails.root.join('app', 'assets/images/default_profile.png')))
-        rand(12).times do
+        rand(5..12).times do
             user = User.create(first_name: Faker::Name.unique.first_name, last_name: Faker::Name.unique.last_name, email: Faker::Internet.email, address: Faker::Address.full_address, password: "password", confirmed_at: Time.now, role: Roles::CUSTOMER)
             user.image.attach('filename': 'profile.png', io: File.open(Rails.root.join('app', 'assets/images/default_profile.png')))
         end 
@@ -56,7 +56,7 @@ def set_products()
         ]
     end
 
-    @count = 10
+    @count = 2
     if @test
         @count = 1
     end
@@ -101,10 +101,10 @@ def set_reservations()
         product_ids = []
         total_amount = 0
 
-        order = Order.new()
-        rand(2..8).times do
-            count = Product.count
-            offset = rand(count)
+        order = Order.new() 
+        count = Product.count
+        2.times do  
+            offset = rand(count) 
             product = Product.offset(offset).first
             total_amount += product.price.to_i 
             order_product = OrderProduct.new(:product_id => product.id)

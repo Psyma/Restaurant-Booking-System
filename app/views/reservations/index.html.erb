@@ -40,7 +40,7 @@
                         <%= render "products", products: @products %>
                         
                         <div class="digg_pagination"> 
-                            <div class="pull-right container d-flex">
+                            <div class="pull-right container">
                                 <%= will_paginate @products, renderer: WillPaginate::ActionView::LinkRenderer  %>    
                             </div>
                         </div> 
