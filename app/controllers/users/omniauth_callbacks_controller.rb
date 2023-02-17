@@ -29,16 +29,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             if user.confirmed?  
                 session[:user_id] = user.id()
                 sign_in_and_redirect user 
-            else
+            else 
                 flash[:notice] = "A verification email has been sent to your email."
                 redirect_to login_path
-            end
-            #flash[:success] = t 'devise.omniauth_callbacks.success', kind: kind   
-            #session[:user_id] = user.id 
-            #sign_in_and_redirect user 
+            end 
         else
-            flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: kind, reason: "#{user.email} is not authorized."
-            redirect_to registrations_path
+            flash[:alert] = "Email already taken"
+            redirect_to login_path
         end
     end  
 end

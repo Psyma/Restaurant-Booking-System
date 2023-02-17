@@ -29,7 +29,7 @@ class PaymentsController < ApplicationController
                 Current.user.notifications << notification
                 
                 admin = User.where(role: Roles::ADMIN).first
-                notification = Notification.new(:title => "Table booked", :content => "#{Current.user.first_name} has booked a table, waiting for a confirmation", :seen => Seen::NOT_SEEN)
+                notification = Notification.new(:title => "Booked", :content => "#{Current.user.first_name} has booked a table, waiting for a confirmation", :seen => Seen::NOT_SEEN)
                 notification.save
                 admin.notifications << notification
             

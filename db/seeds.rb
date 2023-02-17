@@ -7,7 +7,7 @@ Reservation.delete_all
 User.delete_all
 ActionMailer::Base.perform_deliveries = false
 
-@test = false
+@test = true
 
 def set_users()
     if @test
@@ -94,7 +94,7 @@ def set_reservations()
 
         # admin notification
         admin = User.where(role: Roles::ADMIN).first
-        notification = Notification.new(:title => "Table booked", :content => "#{user.first_name} has booked a table, waiting for a confirmation", :seen => Seen::NOT_SEEN)
+        notification = Notification.new(:title => "Booked", :content => "#{user.first_name} has booked a table, waiting for a confirmation", :seen => Seen::NOT_SEEN)
         notification.save
         admin.notifications << notification
 

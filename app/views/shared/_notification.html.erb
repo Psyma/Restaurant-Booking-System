@@ -8,19 +8,36 @@
         </span>   
     </button> 
         
-    <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;" >  
-        <% model.notifications.reverse.each do |notification|%>
-            <li class="mb-1"> 
-                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false"> 
-                    <div class="toast-header">
-                        <strong class="me-auto"><%= notification.title %></strong>  
-                        <small><%= time_ago_in_words notification.created_at, "data-local": "time-ago"  %></small> 
+    <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;">  
+    <hr>
+        <% model.notifications.reverse.each do |notification|%> 
+            <li class="mb-1 container">  
+                <% if notification.title.downcase.include?("confirmed") %>
+                    <div class="alert alert-success">
+                <% elsif notification.title.downcase.include?("deleted") || notification.title.downcase.include?("canceled")%>
+                    <div class="alert alert-dark">
+                <% elsif notification.title.downcase.include?("booked") %>
+                    <div class="alert alert-info">
+                <% elsif notification.title.downcase.include?("declined") %>
+                    <div class="alert alert-danger">
+                <% elsif notification.title.downcase.include?("pending") %>
+                    <div class="alert alert-warning">
+                <% else %>
+                    <div>
+                <% end %> 
+                    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" > 
+                        <div class="toast-header bg-light"> 
+                            <strong class="me-auto" style="cursor: pointer" onclick="click_notification_toast()"><%= notification.title %></strong>   
+                            <small><%= time_ago_in_words notification.created_at, "data-local": "time-ago"  %></small> 
+                        </div>
+                        <div class="toast-body bg-light text-dark">
+                            <%= notification.content %>
+                            <%= %>
+                        </div>
                     </div>
-                    <div class="toast-body">
-                        <%= notification.content %>
-                    </div>
-                </div> 
-            </li> 
+                </div>  
+            </li>  
+            <hr>
         <% end %>
     </ul>   
 <% end %>       

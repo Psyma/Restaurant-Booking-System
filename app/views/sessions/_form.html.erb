@@ -45,11 +45,27 @@
         </div>
     </div>
  
-    <%= link_to "Forgot password?", new_user_password_path, class: "small text-muted" %>   
-    <p class="mb-5 pb-lg-2 text-light" style="color: #393f81;">
-        Don't have an account? <%= link_to "Register here", registrations_path, class: "text-info" %>  
-    </p>
-    <a href="#!" class="small text-muted">Terms of use.</a>
-    <a href="#!" class="small text-muted">Privacy policy</a>
+    <div class="mt-2">
+        <span>
+            <%= link_to "Forgot password?", new_user_password_path, class: "small text-muted" %>   
+        </span>
+        <br>
+        <span>
+            <span class="text-light">
+                 Don't have an account? <%= link_to "Register here", registrations_path, class: "text-info" %> 
+            </span>
+        </span>
+        <br>
+        <span>
+            <span class="text-light">
+                Don't received an email confirmation? <%= link_to "Click here", new_user_confirmation_path, class: "text-info" %>  
+            </span>
+        </span> 
+    </div>
+
+    <div class="mt-4">
+        <a href="#!" class="small text-muted ">Terms of use.</a>
+        <a href="#!" class="small text-muted">Privacy policy</a>
+    </div>
 <% end %>
 <%= javascript_include_tag "js/sessions.js", "data-turbo-track": "reload", defer: true %> 

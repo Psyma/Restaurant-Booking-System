@@ -23,17 +23,21 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr class="text-center"> 
-                                        <th>NAME</th>
-                                        <th>DATE</th> 
-                                        <th>STATUS</th> 
-                                        <th>PRODUCTS</th>
-                                        <th>TOTAL PRICE</th>
-                                        <th><em class="fa fa-cog"></em></th>
+                                        <th><strong>NAME</strong></th>
+                                        <th><strong>DATE</strong></th> 
+                                        <th><strong>STATUS</strong></th> 
+                                        <th><strong>PRODUCTS</strong></th>
+                                        <th><strong>TOTAL PRICE</strong></th>
+                                        <th><strong><em class="fa fa-cog"></em></strong></th>
                                     </tr> 
                                 </thead>
                                 <tbody> 
                                     <% @reservations.each do |reservation|%>  
+                                    <% if reservation.status == Status::CANCELED || reservation.status == Status::DELETED %>
+                                        <tr class="text-center align-middle fw-bold disabled"> 
+                                    <% else %>
                                         <tr class="text-center align-middle fw-bold"> 
+                                    <% end %>
                                             <td>
                                                 <h6>
                                                     <% user = User.find(reservation.user_id) %>
@@ -140,9 +144,9 @@
                                 <table class="table table-striped table-bordered"> 
                                     <thead>
                                         <tr class="text-center"> 
-                                            <th><i class="fa fa-picture-o" aria-hidden="true"></i></th>
-                                            <th>NAME</th> 
-                                            <th>PRICE</th> 
+                                            <th><strong><i class="fa fa-picture-o" aria-hidden="true"></i></strong></th>
+                                            <th><strong>NAME</strong></th>
+                                            <th><strong>PRICE</strong></th>  
                                         </tr> 
                                     </thead>
                                     <tbody>   

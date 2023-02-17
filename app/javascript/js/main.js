@@ -134,5 +134,9 @@ function click_notification(form_id) {
     });  
 }
 
+function click_notification_toast(){
+    $(location).attr('href', '/bookings');
+}
+
 
      

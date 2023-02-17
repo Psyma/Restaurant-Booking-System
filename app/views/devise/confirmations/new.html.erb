@@ -1,16 +1,36 @@
-<h2>Resend confirmation instructions</h2>
+<%= render "shared/navbar"%> 
+<div class="hero-header d-flex justify-content-center align-items-center"  id="content">  
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col col-xl-10">
+                <div class="card bg-dark" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-6 d-flex align-items-center"> 
+                            <%= image_tag "img/hero.png", class: "img-fluid d-none d-md-block" %> 
+                        </div>
+                        <div class="col-md-6 col-lg-6 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black container"> 
+                                <h2 class="text-light mb-4">Resend confirmation instructions</h2>
+                                <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+                                    
+                                    <div class="form-floating mb-4">
+                                        <%= email_field_tag :email, (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), name: field_name(nil, "user", :email), class: "form-control", placeholder: "Email address", autofocus: true %>
+                                        <div class="pull-right text-danger">
+                                            <%= inline_error_for(:email, resource) %>
+                                        </div>
+                                        <%= label_tag :email, "Email address" %>
+                                    </div> 
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+                                    <%= f.submit "Send me confirmation instructions", class: "btn btn-success  mt-2", style: "width: 100%" %>  
+                                     <p class="mt-2 text-light">
+                                        Already have an account? <%= link_to "login here", login_path, class: "text-info" %> 
+                                    </p>
+                                <% end %> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

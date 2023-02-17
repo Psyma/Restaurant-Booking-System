@@ -21,6 +21,9 @@
                                     </div>
 
                                     <%= form.submit "Send me reset password instruction", class: "btn btn-success btn-block mt-2", style: "width: 100%" %>  
+                                    <p class="mt-2 text-light">
+                                        Already have an account? <%= link_to "login here", login_path, class: "text-info" %> 
+                                    </p>
                                 <% end %> 
                             </div>
                         </div>

@@ -22,7 +22,7 @@ class BookingsPageController < ApplicationController
             user.notifications << notification
             
             admin = User.where(role: Roles::ADMIN).first
-            notification = Notification.new(:title => "Table booked confirmed", :content => "A table booked by #{user.first_name} has been confirmed", :seen => Seen::NOT_SEEN)
+            notification = Notification.new(:title => "Confirmed", :content => "A table booked by #{user.first_name} has been confirmed", :seen => Seen::NOT_SEEN)
             notification.save
             admin.notifications << notification  
         end
@@ -42,7 +42,7 @@ class BookingsPageController < ApplicationController
             user.notifications << notification
 
             admin = User.where(role: Roles::ADMIN).first
-            notification = Notification.new(:title => "Table booked declined", :content => "A table booked by #{user.first_name} has been declined", :seen => Seen::NOT_SEEN)
+            notification = Notification.new(:title => "Declined", :content => "A table booked by #{user.first_name} has been declined", :seen => Seen::NOT_SEEN)
             notification.save
             admin.notifications << notification 
         end
@@ -54,6 +54,15 @@ class BookingsPageController < ApplicationController
     def cancel()
         reservation = Reservation.find(params[:reservation_id])
         reservation.update(:status => Status::CANCELED) 
+
+        notification = Notification.new(:title => "Canceled", :content => "You canceled your reservation.", :seen => Seen::NOT_SEEN)
+        notification.save
+        Current.user.notifications << notification
+        
+        admin = User.where(role: Roles::ADMIN).first
+        notification = Notification.new(:title => "Canceled", :content => "#{Current.user.first_name} has canceled its reservation.", :seen => Seen::NOT_SEEN)
+        notification.save
+        admin.notifications << notification
         
         redirect_to bookings_path
     end
@@ -61,6 +70,15 @@ class BookingsPageController < ApplicationController
     def destroy()
         reservation = Reservation.find(params[:reservation_id])
         reservation.update(:status => Status::DELETED) 
+
+        notification = Notification.new(:title => "Deleted", :content => "Reservation is deleted", :seen => Seen::NOT_SEEN)
+        notification.save
+        Current.user.notifications << notification
+        
+        admin = User.where(role: Roles::ADMIN).first
+        notification = Notification.new(:title => "Deleted", :content => "#{Current.user.first_name} has deleted its reservation.", :seen => Seen::NOT_SEEN)
+        notification.save
+        admin.notifications << notification
 
         redirect_to bookings_path
     end
