@@ -7,7 +7,7 @@ Reservation.delete_all
 User.delete_all
 ActionMailer::Base.perform_deliveries = false
 
-@test = true
+@test = false
 
 def set_users()
     if @test
