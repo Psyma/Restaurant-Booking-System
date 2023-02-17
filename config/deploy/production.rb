@@ -10,8 +10,6 @@
 server "ec2-18-143-185-135.ap-southeast-1.compute.amazonaws.com", user: "ubuntu", roles: "%w{app db web}"  
 set :ssh_options, {
     keys: "C:\\Users\\SKYLAND-13\\Downloads\\secret-key.pem",
-#    forward_agent: false,
-#    auth_methods: %w(password)
  }
 # role-based syntax
 # ==================
