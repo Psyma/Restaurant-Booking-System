@@ -18,7 +18,7 @@
                 <ul class="dropdown-menu dropdown-menu-end bg-light " style="max-height: 40em; overflow: auto;">  
                     <% Current.user.notifications.reverse.each do |notification|%>
                         <li class="mb-1 container" style="max-width: 20em;"> 
-                            <% if notification.title.downcase.include?("confirmed") %>
+                           <% if notification.title.downcase.include?("confirmed") %>
                                 <div class="alert alert-success">
                             <% elsif notification.title.downcase.include?("deleted") || notification.title.downcase.include?("canceled")%>
                                 <div class="alert alert-dark">
@@ -26,6 +26,8 @@
                                 <div class="alert alert-info">
                             <% elsif notification.title.downcase.include?("declined") %>
                                 <div class="alert alert-danger">
+                            <% elsif notification.title.downcase.include?("pending") %>
+                                <div class="alert alert-warning">
                             <% else %>
                                 <div>
                             <% end %> 

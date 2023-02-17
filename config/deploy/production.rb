@@ -7,7 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server "ec2-18-143-185-135.ap-southeast-1.compute.amazonaws.com", user: "ubuntu", roles: "%w{app db web}"  
+server "ec2-18-143-185-135.ap-southeast-1.compute.amazonaws.com", user: "ubuntu", roles: "%w{app db web}"   
 set :ssh_options, {
     keys: "C:\\Users\\SKYLAND-13\\Downloads\\secret-key.pem",
  }
