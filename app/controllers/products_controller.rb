@@ -19,15 +19,15 @@ class ProductsController < ApplicationController
 
     # GET /products/new
     def new()
-        @product = Product.new
+        @product = Product.new 
     end
 
     # GET /products/1/edit
-    def edit()
+    def edit() 
     end
 
     # POST /products or /products.json
-    def create()
+    def create() 
         @product = Product.new(product_params)
 
         respond_to do |format|
@@ -36,25 +36,26 @@ class ProductsController < ApplicationController
                     filepath = "assets/images/default_menu.png"
                     @product.image.attach('filename': "default.png", io: File.open(Rails.root.join('app', filepath))) 
                 end
-                format.html { redirect_to new_product_path, notice: "Product was successfully created." }
+                format.html { redirect_to products_path, notice: "Product was successfully created."}
                 format.json { render :new, status: :created, location: @product }
             else
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: @product.errors, status: :unprocessable_entity }
+                format.turbo_stream { render :form_update }
             end
         end
     end
 
     # PATCH/PUT /products/1 or /products/1.json
-    def update()
+    def update() 
         respond_to do |format|
-        if @product.update(product_params)
-            format.html { redirect_to products_path, notice: "Product was successfully updated." }
-            format.json { render :show, status: :ok, location: @product }
-        else
-            format.html { render :edit, status: :unprocessable_entity }
-            format.json { render json: @product.errors, status: :unprocessable_entity }
-        end
+            if @product.update(product_params)
+                format.html { redirect_to products_path, notice: "Product was successfully updated." } 
+            else
+                format.html { render :edit, status: :unprocessable_entity }
+                format.json { render json: @product.errors, status: :unprocessable_entity }
+                format.turbo_stream { render :form_update }
+            end
         end
     end
 

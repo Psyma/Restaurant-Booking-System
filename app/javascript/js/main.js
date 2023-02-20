@@ -115,8 +115,8 @@
         }
     });
     
-})(jQuery); 
- 
+})(jQuery);  
+
 function click_notification(form_id) {     
     var form = $(`#${form_id}`);
     var actionUrl = form.attr('action'); 
@@ -136,7 +136,6 @@ function click_notification(form_id) {
 
 function click_notification_toast(){
     $(location).attr('href', '/bookings');
-}
-
+} 
 
      

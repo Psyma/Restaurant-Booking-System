@@ -34,7 +34,7 @@
                                 <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false"> 
                                     <div class="toast-header bg-light">
                                         <strong class="me-auto" style="cursor: pointer" onclick="click_notification_toast()"><%= notification.title %></strong>  
-                                        <small><%= time_ago_in_words notification.created_at, "data-local": "time-ago"  %></small> 
+                                        <small><%= time_ago_in_words notification.created_at, "data-local": "time-ago" %> ago</small> 
                                     </div>
                                     <div class="toast-body bg-light text-dark">
                                         <%= notification.content %>
@@ -109,9 +109,10 @@
                     <%= button_to "Logout", logout_path, class: "nav-item nav-link", :style => "background-color: unset; border: unset; font-family: Lucida Fax; font-style: Italic", method: :delete %> 
                 <% end %>
             <% end %>
-        </div>     
-        <% if Current.user != nil %>        
-            <%= render "shared/notification", model: Current.user %>  
+        </div>      
+        
+        <% if Current.user != nil %>         
+            <%= render "shared/notification", model: Current.user %>   
         <% end %>
     </div>  
 </nav>

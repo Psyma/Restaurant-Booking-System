@@ -12,29 +12,29 @@
             <%= turbo_frame_tag "reservation" do %> 
                 <div class="text-center" id="turbo-frame-1-content">    
                     <div class="row g-4"> 
-                        <div> 
-                            <div class="pull-right col"> 
-                                <%= search_form_for @q, url: reservations_path do |form|%> 
-                                    <div class="text-center mt-1">
-                                        <%= form.search_field :name_cont%>
-                                        <%= form.submit %>
+                        <div>   
+                            <%= search_form_for @q, class:"row g-3 align-items-center pull-right", url: reservations_path do |form|%> 
+                                <div class="col-auto">
+                                    <div class="d-inline">
+                                        <%= form.search_field :name_cont, class: ""%> 
                                     </div>
-                                <% end %> 
-                            </div>
+                                    <div class="d-inline">
+                                        <%= form.submit nil, class: "btn btn-secondary btn-sm" %> 
+                                    </div> 
+                                </div> 
+                            <% end %>
                             
-                            <div class="pull-right col" style="margin-right: 20px;">  
-                                <%= link_to "continue", payments_path, id: "continue_to_payment", "hidden" => true  %>
-                                <%= form_with url: payments_path, data: { turbo: true } do |form|%>  
-                                    <%= form.button "", class: "position-relative btn btn-primary", formmethod: :get, onclick: "click_payments()" do %> 
-                                        <i class="fa fa-shopping-bag"></i>
-                                        <% if @order.size != 0 %>
-                                            <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
-                                                <%= @order.size %>
-                                            </span>
-                                        <% end %> 
-                                    <% end %>          
-                                <% end %>
-                            </div>   
+                            <%= link_to "continue", payments_path, id: "continue_to_payment", "hidden" => true  %>
+                            <%= form_with url: payments_path, data: { turbo: true }, class: "pull-right" do |form|%>  
+                                <%= form.button "", class: "position-relative btn btn-primary btn-sm", style: "margin-right: 1em", formmethod: :get, onclick: "click_payments()" do %> 
+                                    <i class="fa fa-shopping-bag"></i>
+                                    <% if @order.size != 0 %>
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-pill badge-notification bg-danger w-75">
+                                            <%= @order.size %>
+                                        </span>
+                                    <% end %> 
+                                <% end %>          
+                            <% end %>   
                         </div>   
                         
                         <%= render "products", products: @products %>

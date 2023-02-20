@@ -15,16 +15,20 @@
             </div>
                 <div class="panel-heading"> 
                     <div class="row text-center mb-1 mt-1">   
-                        <div class="col">
-                            <%= search_form_for @q, url: products_path do |form|%> 
-                                <div class="text-center mt-1">
-                                    <%= form.search_field :name_cont%>
-                                    <%= form.submit %>
-                                </div>
-                            <% end %>
+                        <div class="col-auto"> 
+                            <%= search_form_for @q, class:"row g-3 align-items-center", url: products_path do |form|%> 
+                                <div class="col-auto">
+                                    <div class="d-inline">
+                                        <%= form.search_field :name_cont, class: ""%> 
+                                    </div>
+                                    <div class="d-inline">
+                                        <%= form.submit nil, class: "btn btn-secondary btn-sm" %> 
+                                    </div> 
+                                </div> 
+                            <% end %> 
                         </div>
                         <div class="col"> 
-                            <%= link_to "Create New", new_product_path, class: "btn btn-success pull-right", style: "border-radius: 0%;" %> 
+                            <%= link_to "Create New", new_product_path, class: "btn btn-success btn-sm pull-right", data: { turbo_frame: "remote_modal", turbo: true } %> 
                         </div>
                     </div>
                 </div>
@@ -43,6 +47,7 @@
                         </thead>
                         <tbody>
                             <% @products.each do |product|%> 
+                         
                                 <tr class="text-center align-middle fw-bold"> 
                                     <th>
                                         <%= product.id() %>
@@ -68,8 +73,8 @@
                                         <% end%>
                                     </td>
                                     <td class="text-center"> 
-                                        <div class="btn-group">  
-                                            <%= link_to "", edit_product_path(product), class: "btn btn-secondary fa fa-pencil btn-lg mr-1", style: "border-radius: 0%; height: 2.5em" %> 
+                                        <div class="btn-group">    
+                                            <%= link_to "", edit_product_path(product), data: { turbo_frame: "remote_modal", turbo: true }, class: "btn btn-secondary fa fa-pencil btn-lg mr-1", style: "border-radius: 0%; height: 2.5em" %> 
                                             <%= button_to "", product, class: "btn btn-danger fa fa-trash btn-lg disabled", style: "border-radius: 0%; margin-left: 0.5em; height: 2.5em", method: :delete %> 
                                         </div>
                                     </td>
@@ -86,5 +91,6 @@
             </div>  
         <%= javascript_include_tag "js/products.js", "data-turbo-track": "reload", defer: true %>  
     </div>  
-</div>
+</div> 
 <%= render "shared/footer" %>
+<%= turbo_frame_tag "remote_modal", target: "_top" %>

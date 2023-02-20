@@ -73,6 +73,7 @@ group :test do
   gem "webdrivers"
 end 
 
+
 gem 'local_time'
 gem 'bootstrap', '~> 5.2.2'
 gem "font-awesome-rails"
