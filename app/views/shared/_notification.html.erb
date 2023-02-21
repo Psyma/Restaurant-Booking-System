@@ -9,7 +9,10 @@
     </button> 
         
     <ul class="dropdown-menu dropdown-menu-end" style="max-height: 40em; overflow: auto;">  
-    <hr>
+        <div style="margin-left: 1em">
+            <h4>Notifications</h4>
+        </div>
+        <hr>
         <% model.notifications.reverse.each do |notification|%> 
             <li class="mb-1 container">  
                 <% if notification.title.downcase.include?("confirmed") %>
