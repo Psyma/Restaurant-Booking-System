@@ -16,6 +16,10 @@
                </button>
            
                 <ul class="dropdown-menu dropdown-menu-end bg-light " style="max-height: 40em; overflow: auto;">  
+                    <div style="margin-left: 1em">
+                        <h4>Notifications</h4>
+                    </div>
+                    <hr>
                     <% Current.user.notifications.reverse.each do |notification|%>
                         <li class="mb-1 container" style="max-width: 20em;"> 
                            <% if notification.title.downcase.include?("confirmed") %>
@@ -34,7 +38,7 @@
                                 <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false"> 
                                     <div class="toast-header bg-light">
                                         <strong class="me-auto" style="cursor: pointer" onclick="click_notification_toast()"><%= notification.title %></strong>  
-                                        <small><%= time_ago_in_words notification.created_at, "data-local": "time-ago" %> ago</small> 
+                                        <small><%= time_tag notification.created_at, "data-local": "time-ago" %></small> 
                                     </div>
                                     <div class="toast-body bg-light text-dark">
                                         <%= notification.content %>
