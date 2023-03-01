@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
     before_action :check_user 
 
     # GET /products or /products.json
-    def index()
+    def index() 
         @q = Product.ransack(params[:q])
         if @q.result() 
             @products = @q.result() 
