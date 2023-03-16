@@ -34,3 +34,5 @@ If you want to deploy it on docker follow the steps below.
 
 * Change the config/database-docker.yml into database.yml
 * docker compose build && docker compose up
+* docker compose run restoran-web rake db:migrate
+* docker compose run restoran-web rake db:seed
