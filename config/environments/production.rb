@@ -90,9 +90,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.hosts << "ec2-18-143-185-135.ap-southeast-1.compute.amazonaws.com"
-  config.action_mailer.default_url_options = { host: "ec2-18-143-185-135.ap-southeast-1.compute.amazonaws.com" }
-    config.action_mailer.delivery_method = :letter_opener
+  config.hosts << "ec2-18-142-151-4.ap-southeast-1.compute.amazonaws.com"
+  config.action_mailer.default_url_options = { host: "ec2-18-142-151-4.ap-southeast-1.compute.amazonaws.com" }
+    config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.smtp_settings = {
         user_name:      ENV['SENDMAIL_USERNAME'],

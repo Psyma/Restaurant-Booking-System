@@ -1,7 +1,36 @@
-# Restaurant Booking System
+# Restaurant Booking System 
+```
+A simple booking system using Ruby on Rails  
+```
+# QUICK START
+* Run bundle install
+* Run rails db:migrate
+* Run rails db:seed
 
-A simple booking system using Ruby on Rails
+# ENVIRONMENT VARIABLE
+Createa an .env file in the root directory and edit.
 
-Things you may want to cover:
+* SECRET_KEY_BASE: <use rake secret and paste it value>
+* GOOGLE_ID:
+* GOOGLE_SECRET:
+* FACEBOOK_ID:
+* FACEBOOK_SECRET:
+* TWITTER_ID:
+* TWITTER_SECRET:
+* LINKEDIN_ID:
+* LINKEDIN_SECRET:
+* SENDMAIL_USERNAME: <you can use gmail>
+* SENDMAIL_PASSWORD: <you can use gmail>
+* MAIL_HOST: '0.0.0.0:3000'
+* RAILS_ENV=production
+* POSTGRES_HOST=db
+* POSTGRES_DB=restoran
+* POSTGRES_USER=username
+* POSTGRES_PASSWORD=password
+* RAILS_MASTER_KEY= <use rake secret and paste it value>
 
-* ruby "3.1.3" 
+# DEPLOY USING DOCKER
+If you want to deploy it on docker follow the steps below.
+
+* Change the config/database-docker.yml into database.yml
+* docker compose build && docker compose up
