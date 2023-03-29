@@ -19,11 +19,11 @@ Createa an .env file in the root directory and edit.
 * TWITTER_SECRET:
 * LINKEDIN_ID:
 * LINKEDIN_SECRET:
-* SENDMAIL_USERNAME: # you can use gmail
-* SENDMAIL_PASSWORD: # you can use gmail
+* SENDMAIL_USERNAME: # you can use gmail app
+* SENDMAIL_PASSWORD: # you can use gmail app
 * MAIL_HOST: '0.0.0.0:3000'
 * RAILS_ENV=production
-* POSTGRES_HOST=db
+* POSTGRES_HOST=restoran-postgres
 * POSTGRES_DB=restoran
 * POSTGRES_USER=username
 * POSTGRES_PASSWORD=password
